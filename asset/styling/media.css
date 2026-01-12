@@ -1,3 +1,35 @@
-@media screen {
-    
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .left-container {
+        flex-direction: row;
+        min-width: unset;
+        height: auto;
+        padding: 0.5rem;
+    }
+    .right-container {
+        flex-direction: column;
+        margin-right: 0;
+    }
+    .left-items, .right-items {
+        flex: 1;
+    }
+    .wrap {
+        width: 120px;
+        height: 50px;
+    }
+    svg text {
+        font-size: 25px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .wrap {
+        width: 200px;
+        height: 80px;
+    }
+    svg text {
+        font-size: 40px;
+    }
 }

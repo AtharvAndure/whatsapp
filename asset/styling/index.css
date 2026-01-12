@@ -1,3 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+
+svg {
+    font-family: "Russo One", sans-serif;
+    width: 50%;
+    height: 50%;
+}
+
+svg text {
+    animation: stroke 5s infinite alternate;
+    stroke-width: 2;
+    stroke: #00FFFF;
+    font-size: 30px;
+    transition: filter 0.3s ease-in-out;
+}
+
+@keyframes stroke {
+    0% {
+        fill: rgba(0,255,255,0);
+        stroke: rgba(0,255,255,1);
+        stroke-dashoffset: 25%;
+        stroke-dasharray: 0 50%;
+        stroke-width: 2;
+    }
+    70% {
+        fill: rgba(0,255,255,0);
+        stroke: rgba(0,255,255,1);
+    }
+    80% {
+        fill: rgba(0,255,255,0);
+        stroke: rgba(0,255,255,1);
+        stroke-width: 3;
+    }
+    100% {
+        fill: rgba(0,255,255,1);
+        stroke: rgba(0,255,255,0);
+        stroke-dashoffset: -25%;
+        stroke-dasharray: 50% 0;
+        stroke-width: 0;
+    }
+}
+
+.wrap {
+    background: transparent;
+    width: 150px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.wrap:hover svg text {
+    filter: url(#textGlow);
+}
+
+
+
 *{
     margin: 0;
     padding: 0;
@@ -18,27 +77,23 @@ body {
 
 .AppIcon{
     color: #3df6ff;
-    display: block;
+    display: flex;
+    justify-content: flex-start;
     width: 100%;
     height: fit-content;
     margin-top:0.5rem;
-    margin-right: 0.5rem;
+    margin-bottom:0.5rem;
+
+    margin-left: 0.5rem;
 }
 #AppIcon{
-    font-size: clamp(1rem, 2vw, 4rem);
+    font-size: clamp(1rem, 1vw, 3rem);
     font-weight: bold;
-}
-#AppIcon span:hover{
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px #3df6ff, 
-                0 0 20px #3df6ff, 
-                0 0 40px rgba(61, 246, 255, 0.6);
 }
 
 .wrapper{
     display: flex;
-    flex-basis: auto;
-    flex-wrap: wrap ;
+    flex-direction: column;
     height: 100%;
     margin:0 0.5rem 0.5rem 0.5rem;
 }
@@ -48,8 +103,9 @@ body {
     justify-content: center;
     align-items: stretch;
     width: 100%;
-    height: 90%;
+    flex: 1;
     gap:1vw;
+    padding-bottom: 1rem;
 }
 .left-container{
     display: flex;

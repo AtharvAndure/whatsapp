@@ -9,26 +9,51 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="AppIcon"><h1 id="AppIcon"><span>Batte</span></h1></div>
+      <div class="AppIcon">
+        <h1 id="AppIcon">
+          <span>
+            <div class="wrap">
+              <svg>
+                <defs>
+                  <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge> 
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <text x="50%" y="50%" dy="1rem" text-anchor="middle">
+                  Batte
+                </text>
+              </svg>
+            </div>
+          </span>
+        </h1>
+      </div>
 
       <div class="container">
-
         <div class="left-container">
-          <a href=""><span class="sideBorder"></span>
-          <span class="nav-icon active">💬</span></a>
-          <a href=""><span class="sideBorder"></span>
-          <span class="nav-icon">📞</span></a>
-          <a href=""><span class="sideBorder"></span>
-          <span class="nav-icon">👥</span></a>
-          <a href=""><span class="sideBorder"></span>
-          <span class="nav-icon">⚙️</span>
+          <a href=""
+            ><span class="sideBorder"></span>
+            <span class="nav-icon active">💬</span></a
+          >
+          <a href=""
+            ><span class="sideBorder"></span>
+            <span class="nav-icon">📞</span></a
+          >
+          <a href=""
+            ><span class="sideBorder"></span>
+            <span class="nav-icon">👥</span></a
+          >
+          <a href=""
+            ><span class="sideBorder"></span>
+            <span class="nav-icon">⚙️</span>
           </a>
         </div>
 
-
         <div class="right-container">
           <div class="left-items">
-
             <!-- Heading of Left Side -->
             <div class="left-items-header">
               <div class="left-items-heading">Chat</div>
@@ -44,15 +69,11 @@
             </div>
 
             <!-- Chat List of Left Side -->
-             <div class="Chats-List">
+            <div class="Chats-List"></div>
+          </div>
 
-             </div>
-          </div>
-          <div class="right-items">
-            
-          </div>
+          <div class="right-items"></div>
         </div>
-        
       </div>
     </div>
   </body>
