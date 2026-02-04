@@ -34,19 +34,19 @@
 
       <div class="container">
         <div class="left-container">
-          <a href=""
+          <a href="#" onclick="event.preventDefault(); load('component/message.html',this)"
             ><span class="sideBorder"></span>
             <span class="nav-icon active">💬</span></a
           >
-          <a href=""
+          <a href="#" onclick="event.preventDefault(); load('component/callNVideoChat.html',this)"
             ><span class="sideBorder"></span>
             <span class="nav-icon">📞</span></a
           >
-          <a href=""
+          <a href="#" onclick="event.preventDefault(); load('component/newChat.html',this)"
             ><span class="sideBorder"></span>
             <span class="nav-icon">👥</span></a
           >
-          <a href=""
+          <a href="#" onclick="event.preventDefault(); load('component/setting.html',this)"
             ><span class="sideBorder"></span>
             <span class="nav-icon">⚙️</span>
           </a>
@@ -54,27 +54,13 @@
 
         <div class="right-container">
           <div class="left-items">
-            <!-- Heading of Left Side -->
-            <div class="left-items-header">
-              <div class="left-items-heading">Chat</div>
-              <div class="left-items-searchbar">
-                <input type="text" placeholder="Search or start new chat" />
-                <img
-                  id="left-icon"
-                  src="/asset/icon/search.png"
-                  alt=""
-                  srcset=""
-                />
-              </div>
-            </div>
-
-            <!-- Chat List of Left Side -->
-            <div class="Chats-List"></div>
           </div>
 
           <div class="right-items"></div>
         </div>
       </div>
     </div>
+
+    <script src="index.js"></script>
   </body>
 </html>
