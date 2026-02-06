@@ -4,6 +4,7 @@ async function load(filename, event) {
   } else {
     const div = document.getElementsByClassName("left-items")[0];
     const file = await fetch(filename);
+    if (!file.ok) throw new Error(file.status + ' ' + file.statusText);
     console.log("file=" + file);
     const text = await file.text();
     console.log("text" + text);

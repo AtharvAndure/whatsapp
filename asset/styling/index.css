@@ -71,8 +71,10 @@ html, body {
 }
 
 body {
-    background: linear-gradient(135deg, #003003 0%, #123801 40%, #0087a5 100%);
-    background-color: #002024;
+    /* background: linear-gradient(135deg, #003003 0%, #123801 40%, #0087a5 100%);
+    background-color: #002024; */
+    background: linear-gradient(135deg, #00121a 0%, #00303a 40%, #003f4d 100%);
+    background-color: #001219;
 }
 
 .AppIcon{
