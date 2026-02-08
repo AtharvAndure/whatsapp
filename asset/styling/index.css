@@ -206,7 +206,6 @@ a:hover .nav-icon {
 .left-items-heading{
     font-size: clamp(0.75rem, 1.5vw, 1.5rem);
     font-weight: bold;
-    padding-top: 1rem;
 }
 .left-items-searchbar{
     justify-content: center;
@@ -259,5 +258,14 @@ a:hover .nav-icon {
     border: 1px solid rgba(0, 240, 255, 0.1); 
     color: white;
     border-radius: 1rem;
+}
+.individual-logo img,.video-call img,.three-dot img{
+    width: 30px;
+    height: 30px;
+}
+.video-call #dropdown{
+    width: 20px;
+    height: 20px;
+    padding: 2px;
 }
 

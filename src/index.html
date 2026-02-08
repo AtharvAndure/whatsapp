@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,11 +15,17 @@
             <div class="wrap">
               <svg>
                 <defs>
-                  <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                    <feMerge> 
-                      <feMergeNode in="coloredBlur"/>
-                      <feMergeNode in="SourceGraphic"/>
+                  <filter
+                    id="textGlow"
+                    x="-50%"
+                    y="-50%"
+                    width="200%"
+                    height="200%"
+                  >
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                      <feMergeNode in="coloredBlur" />
+                      <feMergeNode in="SourceGraphic" />
                     </feMerge>
                   </filter>
                 </defs>
@@ -34,31 +40,83 @@
 
       <div class="container">
         <div class="left-container">
-          <a href="#" onclick="event.preventDefault(); load('component/message.html',this)"
+          <a
+            href="#"
+            onclick="
+              event.preventDefault();
+              load('component/message.html', this);
+            "
             ><span class="sideBorder"></span>
             <span class="nav-icon active">💬</span></a
           >
-          <a href="#" onclick="event.preventDefault(); load('component/callNVideoChat.html',this)"
+          <a
+            href="#"
+            onclick="
+              event.preventDefault();
+              load('component/callNVideoChat.html', this);
+            "
             ><span class="sideBorder"></span>
             <span class="nav-icon">📞</span></a
           >
-          <a href="#" onclick="event.preventDefault(); load('component/newChat.html',this)"
+          <a
+            href="#"
+            onclick="
+              event.preventDefault();
+              load('component/newChat.html', this);
+            "
             ><span class="sideBorder"></span>
             <span class="nav-icon">👥</span></a
           >
-          <a href="#" onclick="event.preventDefault(); load('component/setting.html',this)"
+          <a
+            href="#"
+            onclick="
+              event.preventDefault();
+              load('component/setting.html', this);
+            "
             ><span class="sideBorder"></span>
             <span class="nav-icon">⚙️</span>
           </a>
         </div>
 
+
+        <!-- Rigt Section-->
         <div class="right-container">
+
+          <!-- Right LEFT Section -->
           <div class="left-items"></div>
 
-          <div class="right-items"></div>
+          <!-- Right RIGHT Section -->
+          <div class="right-items">
+            <div class="right-heading">
+
+              <!-- Changes Need to make -->
+              <div class="left-items-header">
+                <div class="individual-logo"><img src="" alt="#"></div>
+                <div class="left-items-heading">Individual Name</div>
+                <div class="video-call">
+                  <img id="video-call" src="/asset/icon/video.png" alt="">
+                  <img id="dropdown" src="/asset/icon/drop-down.png" alt="">
+                </div>
+                <div class="left-items-searchbar">
+                  <input type="text" placeholder="Search or start new chat" style="display:none;"/>
+                  <img
+                    id="left-icon"
+                    src="/asset/icon/search.png"
+                    alt=""
+                    srcset=""
+                  />
+                </div>
+                <div class="three-dot"><img src="/asset/icon/three-dot.png" alt=""></div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
+
+
+
 
     <script src="index.js"></script>
   </body>
