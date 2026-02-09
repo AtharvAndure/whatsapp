@@ -11,9 +11,23 @@
     .right-container {
         flex-direction: column;
         margin-right: 0;
+        gap: 1rem;
+        overflow: visible;
     }
-    .left-items, .right-items {
+    .left-items {
+        width: 100% !important;
+        min-width: unset !important;
+        max-width: 100% !important;
         flex: 1;
+        border-radius: 1rem !important;
+    }
+    .right-items {
+        flex: 1;
+        border-radius: 1rem !important;
+        border-left: 1px solid rgba(0, 240, 255, 0.1) !important;
+    }
+    .resizer {
+        display: none;
     }
     .wrap {
         width: 120px;

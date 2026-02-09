@@ -178,19 +178,33 @@ a:hover .nav-icon {
     display: flex;
     flex: 15;
     margin-right: 0.5rem;
-    gap: 1vw;
+    gap: 0;
+    overflow: hidden;
 }
 .left-items{
     display: flex;
     flex-direction: column;
-    flex:4;
+    width: 350px;
+    min-width: 250px;
+    max-width: 600px;
     height: 100%;
     gap: 1rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 240, 255, 0.1); 
     color: white;
-    border-radius: 1rem;
+    border-radius: 1rem 0 0 1rem;
+}
+.resizer {
+    width: 4px;
+    cursor: col-resize;
+    background: transparent;
+    transition: background 0.2s;
+    z-index: 10;
+}
+.resizer:hover, .resizer:active {
+    background: #3df6ff;
+    box-shadow: 0 0 10px #3df6ff;
 }
 .left-items-header{
     display: flex;
@@ -250,14 +264,15 @@ a:hover .nav-icon {
 .right-items{
     display: flex;
     flex-direction: column;
-    flex:7;
+    flex: 1;
     height: 100%;
     gap: 1rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 240, 255, 0.1); 
+    border-left: none;
     color: white;
-    border-radius: 1rem;
+    border-radius: 0 1rem 1rem 0;
 }
 .individual-logo img,.video-call img,.three-dot img{
     width: 30px;
@@ -269,3 +284,63 @@ a:hover .nav-icon {
     padding: 2px;
 }
 
+
+
+
+
+
+
+
+
+
+/* Update the container to ensure it doesn't collapse */
+.right-container {
+    display: flex;
+    flex: 15;
+    margin-right: 0.5rem;
+    gap: 0; /* Remove gap to make resizer seamless */
+    overflow: hidden;
+}
+
+/* Set an initial width for left-items */
+.left-items {
+    display: flex;
+    flex-direction: column;
+    width: 350px; /* Initial width */
+    min-width: 250px; /* Minimum limit */
+    max-width: 600px; /* Maximum limit */
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 240, 255, 0.1); 
+    color: white;
+    border-radius: 1rem 0 0 1rem; /* Rounded only on left */
+}
+
+/* The Resizer Style */
+.resizer {
+    width: 4px;
+    cursor: col-resize;
+    background: transparent;
+    transition: background 0.2s;
+    z-index: 10;
+}
+
+.resizer:hover, .resizer:active {
+    background: #3df6ff; /* Neon glow on hover/drag */
+    box-shadow: 0 0 10px #3df6ff;
+}
+
+/* Right side takes remaining space */
+.right-items {
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 240, 255, 0.1); 
+    border-left: none; /* Avoid double borders with resizer */
+    color: white;
+    border-radius: 0 1rem 1rem 0; /* Rounded only on right */
+}
