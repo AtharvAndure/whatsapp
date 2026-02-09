@@ -239,7 +239,7 @@ a:hover .nav-icon {
     border: none;
     background: transparent;
     color: white;
-    font-size: clamp(0.525rem, 0.7vw, 0.875rem);
+    font-size: clamp(0.8rem, 1vw, 1.25rem);
 }
 .left-items-searchbar input[type="text"]:focus {
     /* Removes the default browser focus ring */
