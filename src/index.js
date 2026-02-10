@@ -17,12 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   load("component/message.html", defaultTab);
 });
 
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const resizer = document.getElementById("dragMe");
   const leftSide = document.getElementById("leftItems");
