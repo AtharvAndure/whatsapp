@@ -2,9 +2,6 @@
     .container {
         flex-direction: column-reverse;
     }
-    .AppIcon{
-        justify-content: center;
-    }
     .left-container {
         flex-direction: row;
         min-width: unset;
@@ -33,9 +30,21 @@
     .resizer {
         display: none;
     }
-    /* Removed logo sizing overrides - now handled by main CSS clamp() */
+    .wrap {
+        width: 84px;
+        height: 35px;
+    }
+    svg text {
+        font-size: 17.5px;
+    }
 }
 
 @media screen and (min-width: 1200px) {
-    /* Removed logo sizing overrides - now handled by main CSS clamp() */
+    .wrap {
+        width: 140px;
+        height: 56px;
+    }
+    svg text {
+        font-size: 28px;
+    }
 }
