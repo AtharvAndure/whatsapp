@@ -215,7 +215,7 @@ a:hover .nav-icon {
     border-bottom: rgba(255, 215, 0, 0.5) 1px solid;
 }
 .left-items-heading{
-    font-size: clamp(0.525rem, 1.05vw, 1.05rem);
+    font-size: clamp(1rem, 1.5vw, 3rem);
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
