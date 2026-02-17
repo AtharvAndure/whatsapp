@@ -259,8 +259,9 @@ a:hover .nav-icon {
     margin-left: auto;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    cursor: pointer; 
 }
+
 
 .right-items{
     display: flex;
