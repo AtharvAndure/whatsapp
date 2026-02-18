@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile and Description</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #001219;
+            /* Cyberpunk Grid Background */
+            background-image: 
+                linear-gradient(rgba(0, 18, 25, 0.95), rgba(0, 18, 25, 0.95)),
+                linear-gradient(90deg, rgba(61, 246, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(rgba(61, 246, 255, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            
+            min-height: 100vh; /* Allows scrolling on small screens */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            padding: 20px; /* Prevents content touching edges on mobile */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 500px; /* Keeps layout neat on large screens */
+            gap: 2.5rem; /* Consistent spacing */
+        }
+
+        /* LOGO STYLES */
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        svg {
+            font-family: "Arial Black", "Russo One", sans-serif;
+            width: 100%;
+            height: auto;
+            max-height: 80px;
+        }
+        
+        svg text {
+            stroke-width: 2px;
+            stroke: #3df6ff;
+            fill: rgba(0, 255, 255, 0);
+            font-size: 80px; /* Base size for SVG coordinate system */
+            animation: stroke 4s infinite alternate;
+        }
+
+        @keyframes stroke {
+            0% { stroke-dashoffset: 25%; stroke-dasharray: 0 50%; fill: transparent; }
+            70% { fill: transparent; stroke: #3df6ff; }
+            100% { fill: rgba(61, 246, 255, 0.8); stroke-dashoffset: -25%; stroke-dasharray: 50% 0; }
+        }
+
+        /* PROFILE STYLES */
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        /* Added specific styling for the image container and image */
+        .prof-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(61, 246, 255, 0.3);
+            box-shadow: 0 0 15px rgba(61, 246, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255,255,255,0.05); /* Fallback if no image */
+        }
+
+        .prof-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile label {
+            font-size: 1.2rem;
+            color: wheat;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(61, 246, 255, 0.5);
+        }
+
+        /* INPUT STYLES */
+        .input-group {
+            position: relative;
+            width: 100%; /* Take full width of parent */
+        }
+
+        .input-group input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(61, 246, 255, 0.3);
+            padding: 10px 5px;
+            color: #fff;
+            font-size: 1.1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Input Focus Animation */
+        .input-group input:focus,
+        .input-group input:valid {
+            border-bottom-color: #3df6ff;
+            padding-left: 0; 
+            box-shadow: 0 10px 10px -10px rgba(61, 246, 255, 0.5);
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label {
+            top: -20px;
+            left: 0;
+            font-size: 0.8rem;
+            color: #3df6ff;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(61, 246, 255, 0.8);
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 480px) {
+            .container {
+                gap: 2rem;
+            }
+            
+            .prof-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile label {
+                font-size: 1rem;
+            }
+
+            svg text {
+                font-size: 70px; /* Slightly smaller text for very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="logo-container">
+            <svg viewBox="0 0 300 100">
+                <defs>
+                    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                        <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <text x="50%" y="65%" text-anchor="middle">
+                    BATTE
+                </text>
+            </svg>
+        </div>
+
+        <div class="profile">
+            <div class="prof-img" id="prof-img-container">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Cyberpunk" alt="Profile Avatar">
+            </div>
+            <div>
+                <label for="prof-img">Username</label>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="disc" name="disc" required autocomplete="off">
+            <label for="disc">Describe Yourself...</label>
+        </div>
+
+    </div>
+</body>
+</html>
