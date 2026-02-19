@@ -263,40 +263,43 @@
           </svg>
         </div>
 
-        <form action="" style="display: flex; flex-direction: column; gap: 2.5rem;">
+        <form action="" method="post" style="display: flex; flex-direction: column; gap: 2.5rem;">
           
+          
+          
+          <div class="input-group validation">
+            <input type="text" id="username" name="username" required autocomplete="off">
+            <label for="username">Username</label>
+          </div>
+          <div id="invalid-username" class="alert" style="display: none;">Enter Valid Text</div>
+
           <div class="name-row">
             <div class="input-group">
-              <input type="text" id="firstname" required autocomplete="off">
+              <input type="text" id="firstname" name="firstname" required autocomplete="off" disabled>
               <label for="firstname">First Name</label>
             </div>
             <div class="input-group">
-              <input type="text" id="lastname" required autocomplete="off">
+              <input type="text" id="lastname" name="lastname" required autocomplete="off" disabled>
               <label for="lastname">Last Name</label>
             </div>
           </div>
-
-          <div class="input-group">
-            <input type="text" id="username" required autocomplete="off">
-            <label for="username">Create Username</label>
-          </div>
           
           <div class="input-group">
-            <input type="email" id="email" required autocomplete="off">
+            <input type="email" id="email" name="email" required autocomplete="off" disabled>
             <label for="email">Email Address</label>
           </div>
 
           <div class="input-group">
-            <input type="password" id="pass" required>
+            <input type="password" id="pass" name="pass" required disabled>
             <label for="pass">Password</label>
           </div>
 
           <div class="input-group">
-            <input type="password" id="confirm_pass" required>
+            <input type="password" id="c_pass" name="c_pass" required disabled>
             <label for="confirm_pass">Confirm Password</label>
           </div>
 
-          <button class="btn-signup">Register Identity</button>
+          <button class="btn-signup" onclick="Enter()" disabled>Register Identity</button>
         </form>
 
         <div class="links">
@@ -306,5 +309,7 @@
       </div>
     </div>
 
+
+    <script src="SignupNLoginBackend/signup.js"></script>
   </body>
 </html>
