@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Books</title>
+    <style>
+      /* A little CSS to make the table look nice */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Library Database</h2>
+    <form action="" method="post">
+      <table>
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Branch</th>
+            <th>Cost</th>
+            <th>Published Date</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </form>
+
+    <script>
+      async function fetchData() {
+        const data = await fetch("i.php", { method: "POST" }).then((d) =>
+          d.json(),
+        );
+
+        if (data.status == "success") {
+          // 1. Map the data: Transform each book object into an HTML <tr> string
+          const tableRowsArray = data.data.map((book) => {
+            return `
+                        <tr>
+                            <td>${book.BookID}</td>
+                            <td>${book.Title}</td>
+                            <td>${book.Author}</td>
+                            <td>${book.Branch}</td>
+                            <td>${book.Cost}</td>
+                            <td>${book.PublishedDate}</td>
+                        </tr>
+                    `;
+          });
+
+          // 2. Join the array: Combine all those strings into one giant block of HTML
+          const finalHTML = tableRowsArray.join("");
+
+          // 3. Inject the final HTML into the tbody
+          document.getElementById("table-body").innerHTML = finalHTML;
+        } else {
+          console.log("Error:", data.status, " Message : ", data.message);
+        }
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

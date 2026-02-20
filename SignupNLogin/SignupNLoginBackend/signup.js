@@ -11,8 +11,12 @@ let ValidLastName = false;
 let ValidEmail = false;
 let ValidPassword = false;
 
+function runTimeCheck(){
+
+}
+
 username.addEventListener("keyup", function () {
-  if (!/^[a-zA-Z0-9]{3,15}$/.test(this.value)) {
+  if (!/^[a-zA-Z0-9]{3,15}$/.test(this.value) && runTimeCheck()) {
     this.style.borderBottom="2px solid red";
     document.getElementById("invalid-username").style.display="block";
     document.getElementById("invalid-username").style.color="red";
@@ -20,6 +24,7 @@ username.addEventListener("keyup", function () {
   }else{
     this.style.borderBottom="2px solid rgba(61, 246, 255, 0.3)";
     document.getElementById("invalid-username").style.display="none";
+    validName=true;
   }
 });
 
