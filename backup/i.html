@@ -43,7 +43,7 @@
     <script>
       async function fetchData() {
         const data = await fetch("i.php", { method: "POST" }).then((d) =>
-          d.json(),
+          d.json()
         );
 
         if (data.status == "success") {
