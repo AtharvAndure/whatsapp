@@ -49,23 +49,16 @@
         if (data.status == "success") {
           // 1. Map the data: Transform each book object into an HTML <tr> string
           const tableRowsArray = data.data.map((book) => {
-            return `
-                        <tr>
-                            <td>${book.BookID}</td>
-                            <td>${book.Title}</td>
-                            <td>${book.Author}</td>
-                            <td>${book.Branch}</td>
-                            <td>${book.Cost}</td>
-                            <td>${book.PublishedDate}</td>
-                        </tr>
-                    `;
+            const tr = document.createElement("tr");
+            Object.values(book).forEach((e) => {
+              const td = document.createElement("td");
+              td.textContent = e;
+              tr.appendChild(td);
+            });
+            return tr;
           });
 
-          // 2. Join the array: Combine all those strings into one giant block of HTML
-          const finalHTML = tableRowsArray.join("");
-
-          // 3. Inject the final HTML into the tbody
-          document.getElementById("table-body").innerHTML = finalHTML;
+          document.getElementById("table-body").append(...tableRowsArray);
         } else {
           console.log("Error:", data.status, " Message : ", data.message);
         }
