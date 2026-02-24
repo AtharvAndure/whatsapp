@@ -12,44 +12,88 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Segoe UI', sans-serif;
+        font-family: "Segoe UI", sans-serif;
       }
 
       body {
         background-color: #001219;
         /* Cyberpunk Grid Background */
-        background-image: 
+        background-image:
           linear-gradient(rgba(0, 18, 25, 0.9), rgba(0, 18, 25, 0.9)),
           linear-gradient(90deg, rgba(61, 246, 255, 0.05) 1px, transparent 1px),
           linear-gradient(rgba(61, 246, 255, 0.05) 1px, transparent 1px);
-        background-size: 100% 100%, 40px 40px, 40px 40px;
-        
+        background-size:
+          100% 100%,
+          40px 40px,
+          40px 40px;
+
         /* Layout for Scrolling */
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: flex-start; /* Aligns to top to allow scrolling */
-        padding-top: 80px;       /* Push down from top */
-        padding-bottom: 80px;    /* Push up from bottom */
+        padding-top: 80px; /* Push down from top */
+        padding-bottom: 80px; /* Push up from bottom */
       }
 
       /* Scanline Overlay (Fixed so it doesn't move when scrolling) */
       body::after {
         content: "";
-        position: fixed; 
+        position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: linear-gradient(to bottom, transparent, rgba(61, 246, 255, 0.05), transparent);
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(61, 246, 255, 0.05),
+          transparent
+        );
         animation: scanline 8s linear infinite;
         pointer-events: none;
         z-index: 1;
       }
 
+
+      .icon {
+        height: 2rem;
+        width: 2rem;
+        margin-right: 1rem;
+        color: white;
+      }
+
+      .text {
+        color: white;
+      }
+
+      .toast {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        width: 70%;
+        top: 95px;
+        right: -500px;
+        background-color: black;
+        border-radius: 12px;
+        padding: 0.5rem 1rem;
+        border: 5px solid red;
+        opacity: 0%;
+        transition: all 0.25s ease-out;
+      }
+
+      .toast-active {
+        right: 10px;
+        opacity: 100%;
+      }
+
       @keyframes scanline {
-        0% { transform: translateY(-100%); }
-        100% { transform: translateY(100%); }
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(100%);
+        }
       }
 
       /* --- 2. THE CYBER CONTAINER --- */
@@ -59,38 +103,48 @@
         width: 100%;
         max-width: 450px; /* Slightly wider for better proportions */
         padding: 2px;
-        
+
         /* Chamfered Corners */
         clip-path: polygon(
-          20px 0, 100% 0, 
-          100% calc(100% - 20px), calc(100% - 20px) 100%, 
-          0 100%, 0 20px
+          20px 0,
+          100% 0,
+          100% calc(100% - 20px),
+          calc(100% - 20px) 100%,
+          0 100%,
+          0 20px
         );
-        
+
         background: linear-gradient(135deg, #3df6ff, #00121a, #3df6ff);
         animation: borderPulse 4s infinite alternate;
-        box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
       }
 
       @keyframes borderPulse {
-        0% { filter: brightness(1); }
-        100% { filter: brightness(1.5); }
+        0% {
+          filter: brightness(1);
+        }
+        100% {
+          filter: brightness(1.5);
+        }
       }
 
       .signup-box {
         background: rgba(0, 18, 26, 0.95);
         backdrop-filter: blur(10px);
-        
+
         /* INCREASED PADDING & GAP HERE */
-        padding: 4rem 3rem; 
+        padding: 4rem 3rem;
         display: flex;
         flex-direction: column;
         gap: 2.5rem; /* Creates large spaces between every element */
-        
+
         clip-path: polygon(
-          20px 0, 100% 0, 
-          100% calc(100% - 20px), calc(100% - 20px) 100%, 
-          0 100%, 0 20px
+          20px 0,
+          100% 0,
+          100% calc(100% - 20px),
+          calc(100% - 20px) 100%,
+          0 100%,
+          0 20px
         );
       }
 
@@ -100,13 +154,13 @@
         justify-content: center;
         margin-bottom: 1rem; /* Extra space under logo */
       }
-      
+
       svg {
         font-family: "Russo One", sans-serif;
         width: 100%;
         height: 60px;
       }
-      
+
       svg text {
         stroke-width: 2;
         stroke: #3df6ff;
@@ -116,9 +170,20 @@
       }
 
       @keyframes stroke {
-        0% { stroke-dashoffset: 25%; stroke-dasharray: 0 50%; fill: transparent; }
-        70% { fill: transparent; stroke: #3df6ff; }
-        100% { fill: rgba(61, 246, 255, 0.8); stroke-dashoffset: -25%; stroke-dasharray: 50% 0; }
+        0% {
+          stroke-dashoffset: 25%;
+          stroke-dasharray: 0 50%;
+          fill: transparent;
+        }
+        70% {
+          fill: transparent;
+          stroke: #3df6ff;
+        }
+        100% {
+          fill: rgba(61, 246, 255, 0.8);
+          stroke-dashoffset: -25%;
+          stroke-dasharray: 50% 0;
+        }
       }
 
       /* --- 4. INPUT FIELDS --- */
@@ -178,7 +243,7 @@
       /* --- 5. BUTTON --- */
       .btn-signup {
         margin-top: 2rem; /* Extra push from the inputs */
-        padding: 18px;    /* Taller button */
+        padding: 18px; /* Taller button */
         background: transparent;
         color: #3df6ff;
         border: 1px solid #3df6ff;
@@ -189,8 +254,15 @@
         position: relative;
         overflow: hidden;
         transition: 0.3s;
-        
-        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+
+        clip-path: polygon(
+          10px 0,
+          100% 0,
+          100% calc(100% - 10px),
+          calc(100% - 10px) 100%,
+          0 100%,
+          0 10px
+        );
       }
 
       .btn-signup:hover {
@@ -206,8 +278,18 @@
         background: #3df6ff;
         opacity: 0.5;
       }
-      .top-deco { top: 15px; right: 15px; width: 40px; height: 2px; }
-      .bot-deco { bottom: 15px; left: 15px; width: 40px; height: 2px; }
+      .top-deco {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 2px;
+      }
+      .bot-deco {
+        bottom: 15px;
+        left: 15px;
+        width: 40px;
+        height: 2px;
+      }
 
       .links {
         display: flex;
@@ -215,41 +297,44 @@
         font-size: 0.9rem;
         margin-top: 1rem;
       }
-      
+
       .links a {
-        color: rgba(255,255,255,0.4);
+        color: rgba(255, 255, 255, 0.4);
         text-decoration: none;
         transition: 0.3s;
       }
-      
+
       .links a:hover {
         color: #3df6ff;
       }
-      
+
       @media (max-width: 480px) {
         .name-row {
-            flex-direction: column;
-            gap: 2.5rem; /* Keeps the vertical gap consistent on mobile */
+          flex-direction: column;
+          gap: 2.5rem; /* Keeps the vertical gap consistent on mobile */
         }
         .signup-box {
-            padding: 3rem 1.5rem;
+          padding: 3rem 1.5rem;
         }
       }
-
     </style>
   </head>
   <body>
-
     <div class="signup-wrapper">
       <div class="signup-box">
-        
         <div class="deco-line top-deco"></div>
         <div class="deco-line bot-deco"></div>
 
         <div class="logo-container">
           <svg>
             <defs>
-              <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter
+                id="textGlow"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
                 <feGaussianBlur stdDeviation="3" result="coloredBlur" />
                 <feMerge>
                   <feMergeNode in="coloredBlur" />
@@ -257,58 +342,105 @@
                 </feMerge>
               </filter>
             </defs>
-            <text x="50%" y="50%" dy=".35em" text-anchor="middle">
-              BATTE
-            </text>
+            <text x="50%" y="50%" dy=".35em" text-anchor="middle">BATTE</text>
           </svg>
         </div>
 
-        <form action="" method="post" style="display: flex; flex-direction: column; gap: 2.5rem;">
-          
-          
-          
+        <div class="toast" id="toast">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            class="icon"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <p class="text" id="text"></p>
+        </div>
+
+        <form
+          action=""
+          method="post"
+          style="display: flex; flex-direction: column; gap: 2.5rem"
+        >
           <div class="input-group validation">
-            <input type="text" id="username" name="username" required autocomplete="off">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              autocomplete="off"
+            />
             <label for="username">Username</label>
           </div>
-          <div id="invalid-username" class="alert" style="display: none;">Enter Valid Text</div>
 
           <div class="name-row">
             <div class="input-group">
-              <input type="text" id="firstname" name="firstname" required autocomplete="off" disabled>
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                required
+                autocomplete="off"
+                disabled
+              />
               <label for="firstname">First Name</label>
             </div>
             <div class="input-group">
-              <input type="text" id="lastname" name="lastname" required autocomplete="off" disabled>
+              <input
+                type="text"
+                id="lastname"
+                name="lastname"
+                required
+                autocomplete="off"
+                disabled
+              />
               <label for="lastname">Last Name</label>
             </div>
           </div>
-          
+
           <div class="input-group">
-            <input type="email" id="email" name="email" required autocomplete="off" disabled>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="off"
+              disabled
+            />
             <label for="email">Email Address</label>
           </div>
 
           <div class="input-group">
-            <input type="password" id="pass" name="pass" required disabled>
+            <input type="password" id="pass" name="pass" required disabled />
             <label for="pass">Password</label>
           </div>
 
           <div class="input-group">
-            <input type="password" id="c_pass" name="c_pass" required disabled>
+            <input
+              type="password"
+              id="c_pass"
+              name="c_pass"
+              required
+              disabled
+            />
             <label for="confirm_pass">Confirm Password</label>
           </div>
 
-          <button class="btn-signup" onclick="Enter()" disabled>Register Identity</button>
+          <input type="submit" class="btn-signup" onclick="Enter()" />
         </form>
 
         <div class="links">
           <a href="login.html">// ALREADY HAVE AN ACCOUNT? LOGIN</a>
         </div>
-
       </div>
     </div>
-
 
     <script src="SignupNLoginBackend/signup.js"></script>
   </body>

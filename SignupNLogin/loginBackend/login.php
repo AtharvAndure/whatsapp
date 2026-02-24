@@ -8,7 +8,6 @@
 
 
     try{
-        // get posted username
         $username = isset($_POST['username']) ? trim($_POST['username']) : null;
         if(!$username){
             echo json_encode(["status"=>"error","message"=>"username required"]);
