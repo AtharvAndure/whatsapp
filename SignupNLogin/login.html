@@ -46,6 +46,41 @@
         z-index: 1;
       }
 
+            /* --- 2. TOAST NOTIFICATION (Moved to fixed screen position) --- */
+      .toast {
+        display: flex;
+        align-items: center;
+        position: fixed; /* Fixed to the screen, not the form */
+        top: 30px;
+        right: -500px; /* Hidden way off screen */
+        width: 300px;
+        max-width: 90vw; /* Won't overflow small phones */
+        background-color: black;
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        border: 2px solid red;
+        opacity: 0;
+        z-index: 9999; /* Ensures it is above the scanlines */
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Cool bouncy animation */
+      }
+
+      .toast-active {
+        right: 20px;
+        opacity: 1;
+      }
+
+      .icon {
+        height: 2rem;
+        width: 2rem;
+        margin-right: 1rem;
+        color: white;
+      }
+
+      .text {
+        color: white;
+        font-weight: bold;
+      }
+
       @keyframes scanline {
         0% { transform: translateY(-100%); }
         100% { transform: translateY(100%); }
@@ -220,6 +255,12 @@
     </style>
   </head>
   <body>
+    <div class="toast" id="toast">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p class="text" id="text"></p>
+    </div>
 
     <div class="login-wrapper">
       <div class="login-box">
@@ -244,18 +285,18 @@
           </svg>
         </div>
 
-        <form action="./loginBackend/login.php" method="post">
+        <form action="" method="post" id="loginform">
           <div class="input-group">
             <input type="text" id="username" name="username" required autocomplete="off">
             <label for="user">Username</label>
           </div>
           <br>
           <div class="input-group">
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" required autocomplete="new-password">
             <label for="pass">Password</label>
           </div>
 
-          <button class="btn-login">Initialize</button>
+          <input type="submit" class="btn-login" value="Initialize"/>
         </form>
 
         <div class="links">
@@ -266,5 +307,6 @@
       </div>
     </div>
 
-  </body>
-</html>
+      <script src="./loginBackend/login.js"></script>
+    </body>
+  </html>

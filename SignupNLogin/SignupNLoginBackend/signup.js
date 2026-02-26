@@ -83,7 +83,7 @@ username.addEventListener("keyup", async function() {
     EnableDisable(true);
   }
 });
-function ValidName(val, text, checkVar) {
+function ValidName(val, text) {
   if(!/^[a-zA-Z]{3,15}$/.test(val.value)){
     toastText.innerHTML=text;
     toast.classList.add("toast-active");
