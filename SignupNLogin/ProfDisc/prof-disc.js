@@ -23,3 +23,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     return null;
   }
 });
+
+const profileImage = document.getElementById("profile-image");
+const profileFile = document.getElementById("profile-file");
+
+profileImage.addEventListener("click",function(){
+  profileFile.click();
+  console.log("Profile-Image Click");
+});
+
+profileFile.addEventListener('change', function(event) {
+    const file = event.target.files[0]; 
+
+    if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        profileImage.src = imageUrl;
+    }
+});

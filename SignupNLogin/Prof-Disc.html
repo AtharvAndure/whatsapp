@@ -196,11 +196,11 @@
 
         <div class="profile">
             <div class="prof-img" id="prof-img-container">
-                <label for=""><img src="../asset/images/profile-image.png" alt="Profile Avatar"></label>
-                <input type="file" name="profile-file" id="profile-file">
+                <img src="../asset/images/profile-image.png" alt="Profile Avatar" id="profile-image" >
+                <input type="file" name="profile-file" id="profile-file" style="display: none;" accept="image/*">
             </div>
             <div>
-                <label for="prof-img" id="username"></label>
+                <label for="prof-img" id="username">Username</label>
             </div>
         </div>
 
@@ -211,6 +211,9 @@
 
     </div>
 
-    <script src="./ProfDisc/prof-disc.js"></script>
+    <script>
+        console.log("HTML script tag is loading");
+    </script>
+    <script src="ProfDisc/prof-disc.js?v=2"></script>
 </body>
 </html>
