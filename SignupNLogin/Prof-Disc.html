@@ -153,6 +153,33 @@
             text-shadow: 0 0 8px rgba(61, 246, 255, 0.8);
         }
 
+              .btn-signup {
+        margin-top: 1.5rem; 
+        padding: 18px;
+        background: transparent;
+        color: #3df6ff;
+        border: 1px solid #3df6ff;
+        font-family: "Russo One", sans-serif;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+
+        clip-path: polygon(
+          10px 0, 100% 0, 100% calc(100% - 10px),
+          calc(100% - 10px) 100%, 0 100%, 0 10px
+        );
+      }
+
+      .btn-signup:hover {
+        background: #3df6ff;
+        color: #001219;
+        box-shadow: 0 0 20px rgba(61, 246, 255, 0.6);
+        letter-spacing: 3px;
+      }
+
         /* Responsive Media Queries */
         @media (max-width: 480px) {
             .container {
@@ -205,9 +232,11 @@
         </div>
 
         <div class="input-group">
-            <input type="text" id="disc" name="disc" required autocomplete="off">
+            <input type="text" id="disc" name="disc" required autocomplete="off" maxlength="50">
             <label for="disc">Describe Yourself...</label>
         </div>
+
+        <input type="button" value="Save" class="btn-signup" onclick="saveDisc()"/>
 
     </div>
 
