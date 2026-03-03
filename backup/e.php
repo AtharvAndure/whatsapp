@@ -43,7 +43,7 @@ if(isset($_FILES['img'])){
     if (move_uploaded_file($_FILES["img"]["tmp_name"], $newPath)) {
 
         try {
-            // Insert image path into database
+            // Insert image path into DATABASE
             $sql = "INSERT INTO example (img) VALUES (:imgpath)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':imgpath' => $newPath]);
