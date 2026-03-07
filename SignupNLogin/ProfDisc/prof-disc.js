@@ -1,3 +1,7 @@
+const profileImage = document.getElementById("profile-image");
+const baseLink=profileImage.getAttribute("data-folder");
+const profileFile = document.getElementById("profile-file");
+
 document.addEventListener("DOMContentLoaded", async function () {
     const username=document.getElementById("username");
   try {
@@ -14,6 +18,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     const result = await resp.json();
     if(result.status === "success" && result.data && result.data.username){
         username.innerText = result.data.username;
+        if(result.data.profile_img && baseLink){
+            profileImage.src = `${baseLink}${result.data.profile_img}`;
+        } else if(result.data.profile_img && !baseLink){
+            // Fallback if data-folder attribute is missing
+            profileImage.src = `../asset/images/${result.data.profile_img}`;
+        }
+        if(result.data.profile_disc){
+            document.getElementById("disc").value = result.data.profile_disc;
+        }
     } else {
         console.log('Profile fetch error:', result.message || result);
     }
@@ -23,9 +36,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     return null;
   }
 });
-
-const profileImage = document.getElementById("profile-image");
-const profileFile = document.getElementById("profile-file");
 
 profileImage.addEventListener("click",function(){
   profileFile.click();
@@ -42,21 +52,29 @@ profileFile.addEventListener('change', function(event) {
 });
 
 async function saveDisc(){
-  const profileDisciption = document.getElementById("disc").value.trim();
-  const defaultImg="../asset/images/profile-image.png";
-  const finalImg= profileImage.src !=defaultImg ? profileImage.src : defaultImg ;
-  const data=new FormData();
-  data.append(profileImage,finalImg);
-  data.append(profileDisc,profileDisciption);
+  let profileDescription = document.getElementById("disc").value.trim();
+  const profFile=document.getElementById("profile-file");
+  const defaultImg="profile-image.png";
+  const Discdata=new FormData();
+
+  // If the user typed nothing, set a default "Bio"
+  if (profileDescription === "") {
+    profileDescription = "Hey there! I am using BAATE."; 
+  }
+
+  if(profFile.files && profFile.files[0]){
+    Discdata.append('profileImage',profFile.files[0]);
+  }else{
+    Discdata.append('profileImage',defaultImg);
+  }
+
+  Discdata.append("profileDisc", profileDescription);
   
   try {
     // 1. Send the data to your PHP script
-    const response = await fetch('prof-disc.php', {
+    const response = await fetch('./ProfDisc/prof-disc.php', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json' 
-      },
-      body: JSON.stringify(data) 
+      body: Discdata 
     });
 
     // 2. Wait for the PHP script to send a response back
@@ -65,7 +83,7 @@ async function saveDisc(){
     // 3. Check if the HTTP request was successful (status 200-299)
     if (response.ok) {
       console.log("Success! Profile saved:", result);
-      window.location.href = '../../src/index.html'; 
+      window.location.href = '../src/index.html'; 
     } else {
       // Handle server-side errors (e.g., database failure)
       console.error("Server error:", result.message || "Unknown error occurred.");

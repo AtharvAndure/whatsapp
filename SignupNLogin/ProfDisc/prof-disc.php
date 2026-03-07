@@ -16,7 +16,7 @@ $username = $_SESSION['username'];
 // 1. HANDLE GET REQUEST (FETCHING DATA)
 // ==========================================
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $query = "SELECT username, profile_img FROM users WHERE username = :user LIMIT 1";
+    $query = "SELECT username, profile_img, profile_disc FROM users WHERE username = :user LIMIT 1";
     $stmt = $pdo->prepare($query);
     $stmt->execute([':user' => $username]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -35,31 +35,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // 2. HANDLE POST REQUEST (UPDATING DATA)
 // ==========================================
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Read the raw JSON from the JavaScript fetch request
-    $jsonInput = file_get_contents('php://input');
-    $data = json_decode($jsonInput, true);
 
-    $profileImg = isset($data['profileImage']) ? $data['profileImage'] : NULL;
-    $profileDisc = isset($data['profileDisc']) ? $data['profileDisc'] : NULL;
+    $location = "../../asset/images/";
+    $profileDisc = isset($_POST['profileDisc']) ? trim($_POST['profileDisc']) : NULL;
+    $profileImg = "";
 
-    // Optional: Check if data is completely missing
-    if (!$profileImg && !$profileDisc) {
-        echo json_encode(["status"=>"error", "message"=>"No data provided to update."]);
-        exit;
+    // Handle image upload
+    if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
+        $imgType = strtolower(pathinfo($_FILES["profileImage"]["name"], PATHINFO_EXTENSION));
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($imgType, $allowedTypes)) {
+            echo json_encode(["status"=>"error", "message"=>"Invalid image type."]);
+            exit;
+        }
+        $newFileName = uniqid("img_", true) . "." . $imgType;
+        $newPath = $location . $newFileName;
+        if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $newPath)) {
+            $profileImg = $newFileName;
+        } else {
+            echo json_encode(["status"=>"error", "message"=>"Failed to upload image."]);
+            exit;
+        }
+    } elseif (isset($_POST['profileImage'])) {
+        $profileImg = $_POST['profileImage']; // default image
     }
 
-    $query = "UPDATE users SET profile_img=:profImg, profile_disc=:profDisc WHERE username=:username";
+    // If no description provided, set default
+    if (!$profileDisc) {
+        $profileDisc = "Hey there! I am using BAATE.";
+    }
+
+    // Update database
+    $query = "UPDATE users SET profile_img = :profImg, profile_disc = :profDisc WHERE username = :username";
     $stmt = $pdo->prepare($query);
-    
-    // Execute with all 3 bound parameters
     $success = $stmt->execute([
-        ':profImg'   => $profileImg,
-        ':profDisc'  => $profileDisc,
-        ':username'  => $username // Added the missing username binding
+        ':profImg' => $profileImg,
+        ':profDisc' => $profileDisc,
+        ':username' => $username
     ]);
 
     if ($success) {
-        // Send success for POST and EXIT
         echo json_encode(["status"=>"success", "action"=>"update", "message"=>"Profile updated!"]);
     } else {
         echo json_encode(["status"=>"error", "message"=>"Database update failed."]);
