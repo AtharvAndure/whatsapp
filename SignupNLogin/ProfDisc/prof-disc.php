@@ -37,10 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $location = "../../asset/images/";
-    $profileDisc = isset($_POST['profileDisc']) ? trim($_POST['profileDisc']) : NULL;
-    $profileImg = "";
+    $profileDisc = isset($_POST['profileDisc']) ? trim($_POST['profileDisc']) : "";
+    $profileImg = null;
+    $hasNewImage = false;
 
-    // Handle image upload
+    // Handle image upload only if a file was provided
     if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
         $imgType = strtolower(pathinfo($_FILES["profileImage"]["name"], PATHINFO_EXTENSION));
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
@@ -52,27 +53,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newPath = $location . $newFileName;
         if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $newPath)) {
             $profileImg = $newFileName;
+            $hasNewImage = true;
         } else {
             echo json_encode(["status"=>"error", "message"=>"Failed to upload image."]);
             exit;
         }
-    } elseif (isset($_POST['profileImage'])) {
-        $profileImg = $_POST['profileImage']; // default image
     }
 
     // If no description provided, set default
-    if (!$profileDisc) {
+    if ($profileDisc=="") {
         $profileDisc = "Hey there! I am using BAATE.";
     }
 
-    // Update database
-    $query = "UPDATE users SET profile_img = :profImg, profile_disc = :profDisc WHERE username = :username";
+    // Update database - only update image if a new one was uploaded
+    if ($hasNewImage) {
+        $query = "UPDATE users SET profile_img = :profImg, profile_disc = :profDisc WHERE username = :username";
+        $bindings = [
+            ':profImg' => $profileImg,
+            ':profDisc' => $profileDisc,
+            ':username' => $username
+        ];
+    } else {
+        $query = "UPDATE users SET profile_disc = :profDisc WHERE username = :username";
+        $bindings = [
+            ':profDisc' => $profileDisc,
+            ':username' => $username
+        ];
+    }
     $stmt = $pdo->prepare($query);
-    $success = $stmt->execute([
-        ':profImg' => $profileImg,
-        ':profDisc' => $profileDisc,
-        ':username' => $username
-    ]);
+    $success = $stmt->execute($bindings);
 
     if ($success) {
         echo json_encode(["status"=>"success", "action"=>"update", "message"=>"Profile updated!"]);

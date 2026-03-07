@@ -54,7 +54,6 @@ profileFile.addEventListener('change', function(event) {
 async function saveDisc(){
   let profileDescription = document.getElementById("disc").value.trim();
   const profFile=document.getElementById("profile-file");
-  const defaultImg="profile-image.png";
   const Discdata=new FormData();
 
   // If the user typed nothing, set a default "Bio"
@@ -62,10 +61,9 @@ async function saveDisc(){
     profileDescription = "Hey there! I am using BAATE."; 
   }
 
+  // Only append image if user selected a new one
   if(profFile.files && profFile.files[0]){
     Discdata.append('profileImage',profFile.files[0]);
-  }else{
-    Discdata.append('profileImage',defaultImg);
   }
 
   Discdata.append("profileDisc", profileDescription);
