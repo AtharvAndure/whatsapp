@@ -41,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $profileImg = null;
     $hasNewImage = false;
 
+    
+
     // Handle image upload only if a file was provided
     if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
         $imgType = strtolower(pathinfo($_FILES["profileImage"]["name"], PATHINFO_EXTENSION));

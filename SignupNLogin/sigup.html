@@ -211,6 +211,73 @@
         font-weight: bold;
       }
 
+      /* email OTP */
+
+      .form-row {
+        display: flex;
+        align-items: flex-end; 
+        gap: 15px; 
+        width: 100%;
+      }
+
+       #otp {
+        border: 1px solid rgba(61, 246, 255, 0.5); /* Full box border */
+        background: rgba(0, 0, 0, 0.2); /* Darker background */
+        text-align: center; /* Center the code */
+        letter-spacing: 1.2rem; /* Wide spacing for digits */
+        font-family: 'Russo One', sans-serif; /* Tech font for numbers */
+        font-size: 1.5rem; /* Larger numbers */
+        padding: 10px;
+        box-shadow: inset 0 0 10px rgba(61, 246, 255, 0.1); /* Inner glow */
+      }
+
+      /* Focus state for OTP */
+      #otp:focus {
+        border-color: #3df6ff;
+        box-shadow: 0 0 15px rgba(61, 246, 255, 0.3), inset 0 0 10px rgba(61, 246, 255, 0.2);
+        padding-left: 10px; /* Keep standard padding, don't shift like standard inputs */
+      }
+
+      /* Adjust label position for the centered OTP box */
+      .otp-container label {
+        left: 50%;
+        transform: translateX(-50%); /* Center the label initially */
+        width: 100%;
+        text-align: center;
+      }
+      
+      /* When focused, move label up and keep centered */
+      .otp-container input:focus ~ label,
+      .otp-container input:valid ~ label {
+        top: -30px; 
+        left: 50%; 
+        transform: translateX(-50%);
+        color: #3df6ff;
+      }
+
+      .btn-otp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(61, 246, 255, 0.1);
+        color: #3df6ff;
+        border: 1px solid rgba(61, 246, 255, 0.5);
+        font-family: "Russo One", sans-serif;
+        font-size: 0.8rem;
+        padding: 10px 15px;
+        cursor: pointer;
+        white-space: nowrap; 
+        height: 45px; 
+        transition: 0.3s;
+        clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+      }
+
+      .btn-otp:hover {
+        background: #3df6ff;
+        color: #001219;
+        box-shadow: 0 0 10px rgba(61, 246, 255, 0.4);
+      }
+
       /* --- 6. GENDER RADIO BUTTONS --- */
       .gender-container {
         width: 100%;
@@ -576,9 +643,17 @@
             </div>
           </div>
 
-          <div class="input-group">
-            <input type="email" id="email" name="email" required autocomplete="off" disabled />
-            <label for="email">Email Address</label>
+          <div class="form-row">
+            <div class="input-group">
+              <input type="email" id="email" name="email" required autocomplete="off" disabled />
+              <label for="email">Email Address</label>
+            </div>
+            <button type="button" class="btn-otp" id="btn-otp">GET OTP</button>
+          </div>
+
+          <div class="input-group otp-container">
+            <input type="text" id="otp" required autocomplete="off" maxlength="6">
+            <label for="otp">Enter Code</label>
           </div>
 
           <div class="input-group">
