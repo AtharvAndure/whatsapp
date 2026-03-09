@@ -8,6 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit;
 }
 
+session_start();
+
 try {
     // 2. Safely grab inputs (using trim to remove accidental spaces)
     $username = trim($_POST['username'] ?? '');
@@ -56,18 +58,29 @@ try {
     // 7. Prepare and Execute the SQL Query
     $query = $pdo->prepare("INSERT INTO users (username, first_name, last_name, email, pass, profile_img, gender) VALUES (:username, :firstn, :lastn, :email, :pass, :profile_img, :gender)");
     
-    $query->execute([
+   // Execute the query and check if it returns true (success)
+    if ($query->execute([
         ':username'    => $username,
         ':firstn'      => $first,
         ':lastn'       => $last,
         ':email'       => $email,
-        ':pass'        => $hashed_password, // Storing the scrambled hash, NOT the raw text
+        ':pass'        => $hashed_password, 
         ':profile_img' => $prof_img,
         ':gender'      => $gender
-    ]);
-
-    // 8. Send a success message back to the JavaScript!
-    echo json_encode(["status" => "success", "message" => "Registration successful!"]);
+    ])) {
+        // 8. If successful, set the temporary session and send success message
+        
+        // Use a temporary session key to prevent old session collisions
+        $_SESSION['Username'] = $username;
+        
+        // Send JSON response and exit immediately
+        echo json_encode(["status" => "success", "message" => "Registration successful!"]);
+        exit;
+    } else {
+        // If the query fails to execute but doesn't trigger a PDO exception
+        echo json_encode(["status" => "error", "message" => "Failed to register user to the database."]);
+        exit;
+    }
 
 } catch (PDOException $e) {
     // Handle database errors

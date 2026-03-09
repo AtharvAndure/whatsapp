@@ -10,7 +10,7 @@ if (empty($_SESSION['username'])){
     exit;
 }
 
-$username = $_SESSION['username'];
+$username = $_SESSION['Username'];
 
 // ==========================================
 // 1. HANDLE GET REQUEST (FETCHING DATA)

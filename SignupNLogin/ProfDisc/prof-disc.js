@@ -81,7 +81,7 @@ async function saveDisc(){
     // 3. Check if the HTTP request was successful (status 200-299)
     if (response.ok) {
       console.log("Success! Profile saved:", result);
-      window.location.href = '../src/index.html'; 
+      window.location.href = 'login.html'; 
     } else {
       // Handle server-side errors (e.g., database failure)
       console.error("Server error:", result.message || "Unknown error occurred.");

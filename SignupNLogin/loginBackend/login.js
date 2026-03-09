@@ -46,7 +46,7 @@ document.getElementById("loginform").addEventListener("submit", async function(e
   const result = await runTimeCheck(username, password);
     if (result && result.status === "success" && result.data === true) {
       // Redirect to Profile/Discussion page on successful login
-      window.location.href = "../SignupNLogin/Prof-Disc.html";
+      window.location.href = "Prof-Disc.html";
   } else {
     toastText.innerHTML = (result && result.message) ? result.message : "Enter Valid Username and Password";
     toast.classList.add("toast-active");
