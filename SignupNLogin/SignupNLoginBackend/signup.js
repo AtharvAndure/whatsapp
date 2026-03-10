@@ -7,6 +7,8 @@ const cpassword = document.getElementById("c_pass");
 const genderRadios = document.querySelectorAll('input[name="gender"]');
 const toast = document.getElementById("toast");
 const toastText=document.getElementById("text");
+const btnOTP=document.getElementById("btn-otp"); 
+const otpInput=document.getElementById("otp");
 
 // valid or not
 let validName = false;
@@ -15,6 +17,8 @@ let checklastname=false;
 let checkemail=false;
 let checkpassword=false;
 let checkgender=true; // Male is checked by default
+let otpSent = false;
+let checkotp=false;
 
 // 1. Select the button
 const btnSignup = document.querySelector(".btn-signup");
@@ -26,7 +30,8 @@ function EnableDisable(val) {
   lastname.disabled = !val;
   email.disabled = !val;
   password.disabled = !val;
-  
+  otpInput.disabled = !val;
+  btnOTP.disabled=!val;
   // Enable/disable all gender radios
   genderRadios.forEach(radio => {
     radio.disabled = !val;
