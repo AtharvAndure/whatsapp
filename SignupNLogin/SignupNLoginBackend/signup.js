@@ -9,6 +9,7 @@ const toast = document.getElementById("toast");
 const toastText=document.getElementById("text");
 const btnOTP=document.getElementById("btn-otp"); 
 const otpInput=document.getElementById("otp");
+const otpContainer = document.querySelector(".otp-container");
 
 // valid or not
 let validName = false;
@@ -23,6 +24,8 @@ let checkotp=false;
 // 1. Select the button
 const btnSignup = document.querySelector(".btn-signup");
 
+otpInput.disabled = true;
+btnOTP.disabled=true;
 
 function EnableDisable(val) {
   // If val is true, disabled becomes false. If val is false, disabled becomes true.
@@ -30,8 +33,6 @@ function EnableDisable(val) {
   lastname.disabled = !val;
   email.disabled = !val;
   password.disabled = !val;
-  otpInput.disabled = !val;
-  btnOTP.disabled=!val;
   // Enable/disable all gender radios
   genderRadios.forEach(radio => {
     radio.disabled = !val;
@@ -128,12 +129,25 @@ email.addEventListener("input",function(){
     toast.classList.add("toast-active");
     email.style.borderBottom = "2px solid red";
     checkemail = false;
+    btnOTP.disabled = true;
   }else{
     toast.classList.remove("toast-active");
     email.style.borderBottom = "2px solid rgba(61, 246, 255, 0.3)";
-    checkemail=true;
+    // checkemail=true;
+    btnOTP.disabled = false;
   }
   checkAllValidations();
+});
+
+// 2. Button Click Listener (Triggers the animation)
+btnOTP.addEventListener("click", function() {
+  // Add the 'show' class to the OTP container to animate it in
+  otpContainer.classList.add("show");
+  
+  // Optional: Change the button text or disable the email input so they don't change it after requesting an OTP
+  btnOTP.innerText = "RESEND OTP";
+  otpInput.disabled = false; // Enable OTP input
+  email.disabled = true; 
 });
 
 // Password Validation
