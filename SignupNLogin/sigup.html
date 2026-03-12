@@ -215,7 +215,7 @@
 
       .form-row {
         display: flex;
-        align-items: flex-end; 
+        align-items: center; /* vertically center input and button */
         gap: 15px; 
         width: 100%;
       }
@@ -280,50 +280,55 @@
 
       /* OTP TextField Animation */
       /* Base state for the OTP container (Hidden) */
-.otp-container {
-  position: relative;
-  width: 100%;
-  
-  /* Hide the element and shrink its height */
-  max-height: 0;
-  opacity: 0;
-  margin-top: 0;
-  pointer-events: none; /* Prevents accidental clicks while hidden */
-  
-  /* Slide it up slightly for a cool drop-down effect */
-  transform: translateY(-10px); 
-  
-  /* Hide overflow so it doesn't spill out while shrinking */
-  overflow: hidden; 
-  
-  /* Smoothly animate all these properties */
-  transition: max-height 0.5s ease, 
-              opacity 0.4s ease, 
-              margin-top 0.4s ease, 
-              transform 0.4s ease;
-}
+      .otp-container {
+        position: relative;
+        width: 100%;
+        
+        /* Hide the element and shrink its height */
+        max-height: 0;
+        opacity: 0;
+        margin-top: 0;
+        /* pull following field up to cancel parent gap when hidden */
+        margin-bottom: -2.5rem;
+        pointer-events: none; /* Prevents accidental clicks while hidden */
+        
+        /* Slide it up slightly for a cool drop-down effect */
+        transform: translateY(-10px); 
+        
+        /* Hide overflow so it doesn't spill out while shrinking */
+        overflow: hidden; 
+        
+        /* Smoothly animate all these properties */
+        transition: max-height 0.5s ease, 
+                    opacity 0.4s ease, 
+                    margin-top 0.4s ease, 
+                    margin-bottom 0.4s ease, 
+                    transform 0.4s ease;
+      }
 
-/* Active state for the OTP container (Visible) */
-.otp-container.show {
-  /* Expand the height (120px is safely taller than your input) */
-  max-height: 120px; 
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  
-  /* Important: Adds gap above so your floating label (top: -30px) fits perfectly */
-  margin-top: 45px; 
-  
-  /* Important: Allow the glowing box-shadow and floating label to extend outside the container once opened */
-  overflow: visible; 
-  
-  /* The delay on 'overflow' ensures it stays hidden during the animation, but becomes visible right after */
-  transition: max-height 0.5s ease, 
-              opacity 0.4s ease, 
-              margin-top 0.4s ease, 
-              transform 0.4s ease, 
-              overflow 0s 0.5s; 
-}
+      /* Active state for the OTP container (Visible) */
+      .otp-container.show {
+        /* Expand the height (120px is safely taller than your input) */
+        max-height: 120px; 
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        
+        /* Important: Adds gap above so your floating label (top: -30px) fits perfectly */
+        margin-top: 45px;
+        margin-bottom: 0; /* restore normal spacing when visible */
+        
+        /* Important: Allow the glowing box-shadow and floating label to extend outside the container once opened */
+        overflow: visible; 
+        
+        /* The delay on 'overflow' ensures it stays hidden during the animation, but becomes visible right after */
+        transition: max-height 0.5s ease, 
+                    opacity 0.4s ease, 
+                    margin-top 0.4s ease, 
+                    margin-bottom 0.4s ease,
+                    transform 0.4s ease, 
+                    overflow 0s 0.5s; 
+      }
 
       /* --- 6. GENDER RADIO BUTTONS --- */
       .gender-container {
