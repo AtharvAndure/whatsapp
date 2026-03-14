@@ -143,7 +143,6 @@ email.addEventListener("input",function(){
 btnOTP.addEventListener("click", function() {
   // Add the 'show' class to the OTP container to animate it in
   otpContainer.classList.add("show");
-  
   // Optional: Change the button text or disable the email input so they don't change it after requesting an OTP
   btnOTP.innerText = "RESEND OTP";
   otpInput.disabled = false; // Enable OTP input

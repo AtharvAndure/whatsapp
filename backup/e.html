@@ -3,61 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        table {
-            width: 300px;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        img {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-        }
-    </style>
+    <title>Validation</title>
 </head>
-
 <body>
+    <h1>Validation</h1>
+    <input type="text" name="email" id="email">
+    <input type="button" value="submit" id="submit" disabled/>
+    <script>
+        const button=document.getElementById("submit");
+        const email=document.getElementById("email");   
+        email.addEventListener("input", function(){
+            var email = document.getElementById("email").value;
+            var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(regex.test(email)){
+                document.querySelector("input[type='button']").disabled = false;
+            }else{
+                document.querySelector("input[type='button']").disabled = true;
+            }
+        });
+        button.addEventListener("keydown",async function(){
+            const data=new FormData();
+            email.disabled=true;
+            data.append("email",email.value);
+            const response=await fetch("e.php",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:data
+            });
+        });
 
-    <div>
-        <input type="file" id="img" accept="image/*">
-    </div>
-
-    <div>
-        <table>
-            
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Image</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr id="row">
-                    
-                </tr>
-            </tbody>
-
-        </table>
-    </div>
-    <script src="e.js"></script>
+    </script>
 </body>
 </html>
