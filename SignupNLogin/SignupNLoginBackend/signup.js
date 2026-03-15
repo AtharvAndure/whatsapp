@@ -147,6 +147,9 @@ btnOTP.addEventListener("click", function() {
   btnOTP.innerText = "RESEND OTP";
   otpInput.disabled = false; // Enable OTP input
   email.disabled = true; 
+
+
+  
 });
 
 // Password Validation
