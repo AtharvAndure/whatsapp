@@ -10,30 +10,54 @@
     <input type="text" name="email" id="email">
     <input type="button" value="submit" id="submit" disabled/>
     <script>
-        const button=document.getElementById("submit");
-        const email=document.getElementById("email");   
+        const button = document.getElementById("submit");
+        const email = document.getElementById("email");   
+        
+        // Email validation to enable/disable button
         email.addEventListener("input", function(){
-            var email = document.getElementById("email").value;
+            var emailValue = email.value;
+            // Slightly improved regex
             var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if(regex.test(email)){
-                document.querySelector("input[type='button']").disabled = false;
-            }else{
-                document.querySelector("input[type='button']").disabled = true;
+            
+            if(regex.test(emailValue)){
+                button.disabled = false;
+            } else {
+                button.disabled = true;
             }
         });
-        button.addEventListener("keydown",async function(){
-            const data=new FormData();
-            email.disabled=true;
-            data.append("email",email.value);
-            const response=await fetch("e.php",{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:data
-            });
-        });
 
+        // Changed from 'keydown' to 'click'
+        button.addEventListener("click", async function() {
+            const data = new FormData();
+            email.disabled = true;
+            button.disabled = true; // Good practice to disable the button while fetching
+            
+            data.append("email", email.value);
+            
+            try {
+                const response = await fetch("e.php", {
+                    method: "POST",
+                    // REMOVED the Content-Type header so the browser handles FormData correctly
+                    body: data
+                });
+
+                const responseData = await response.json();
+
+                // Changed to check data.status based on your PHP
+                if(responseData.status === "success"){
+                    console.log("Email submitted successfully! Message:", responseData.message);
+                } else {
+                    console.log("Failed to submit email. Message:", responseData.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while submitting the email.");
+            } finally {
+                // Re-enable inputs after the request finishes
+                email.disabled = false;
+                button.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>
