@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 require_once __DIR__ . "/../connection/connection.php";
 require_once __DIR__ . "/../vendor/autoload.php";
 
-// Check Wether the method is POST or NOT!
+// Check Wether the method is POST or not!
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo json_encode(["status" => "error", "message" => "Method is not POST"]);
     exit;
