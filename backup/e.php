@@ -23,7 +23,7 @@ if($email==""){
 
     echo json_encode(["status"=>"success","message"=>"Valid Email"]);
 
-// Generate Random Number
+// Generate Random Number and Store inside SESSION
     $otp=random_int(100000,999999);
     $_SESSION["otp"]=$otp;
 
