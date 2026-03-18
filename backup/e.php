@@ -12,6 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
+session_start();
+
 $email=isset($_POST["email"])?$_POST["email"]:"";
 if($email==""){
     echo json_encode(["status"=>"error","message"=>"Enter Valid Email"]);
@@ -23,6 +25,7 @@ if($email==""){
 
 // Generate Random Number
     $otp=random_int(100000,999999);
+    $_SESSION["otp"]=$otp;
 
 
 // Step 1 : using PHP Mailer to send the Email
