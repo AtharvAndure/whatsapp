@@ -21,6 +21,10 @@ if($email==""){
 
     echo json_encode(["status"=>"success","message"=>"Valid Email"]);
 
+// Generate Random Number
+    $otp=random_int(100000,999999);
+
+
 // Step 1 : using PHP Mailer to send the Email
     $mail=new PHPMailer(true);
 
