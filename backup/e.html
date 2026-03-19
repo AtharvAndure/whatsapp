@@ -9,9 +9,14 @@
     <h1>Validation</h1>
     <input type="text" name="email" id="email">
     <input type="button" value="submit" id="submit" disabled/>
+    <br><br>
+    <input type="text" name="otp" id="otp" disabled/>
+    <input type="button" value="verify" id="verify" disabled/>
     <script>
         const button = document.getElementById("submit");
-        const email = document.getElementById("email");   
+        const email = document.getElementById("email"); 
+        const otpInput = document.getElementById("otp");
+        const verifyButton = document.getElementById("verify");  
         
         // Email validation to enable/disable button
         email.addEventListener("input", function(){
@@ -46,6 +51,7 @@
                 // Changed to check data.status based on your PHP
                 if(responseData.status === "success"){
                     console.log("Email submitted successfully! Message:", responseData.message);
+                    otpInput.disabled = false;
                 } else {
                     console.log("Failed to submit email. Message:", responseData.message);
                 }
@@ -56,6 +62,37 @@
                 // Re-enable inputs after the request finishes
                 email.disabled = false;
                 button.disabled = false;
+            }
+        });
+
+        otpInput.addEventListener("input", function() {
+            if(otpInput.value.length === 6){
+                verifyButton.disabled = false;
+            } else {
+                verifyButton.disabled = true;
+            }
+        });
+        verifyButton.addEventListener("click", async function() {
+            const data=new FormData();
+            data.append("verify_otp",otpInput.value);
+            otpInput.disabled = true;
+            const response=await fetch("verify.php",{
+                method:"POST",
+                body:data
+            })
+            if(response.ok){
+                const responseData=await response.json();
+                if(responseData.status === "success"){
+                    window.location.href = "success.html"; // Redirect to success pages
+                    console.log("OTP verified successfully! Message:", responseData.message);
+
+                } else {
+                    console.log("Failed to verify OTP. Message:", responseData.message);
+                    otpInput.disabled = false; // Re-enable OTP input for retry
+                }
+            } else {
+                console.error("Error verifying OTP. Status:", response.status);
+                alert("An error occurred while verifying the OTP.");
             }
         });
     </script>

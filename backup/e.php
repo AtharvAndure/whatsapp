@@ -25,7 +25,7 @@ if($email==""){
 
 // Generate Random Number and Store inside SESSION
     $otp=random_int(100000,999999);
-    $_SESSION["otp"]=$otp;
+    $_SESSION["otp"]=(string)$otp;
 
 
 // Step 1 : using PHP Mailer to send the Email
@@ -52,7 +52,7 @@ if($email==""){
 
 // Step 7 : Body and Message
     $mail->Subject="OTP Verification";
-    $mail->Body = "Your OTP is 4658";
+    $mail->Body = "Your OTP is $otp";
 
 // Step 8 : Send the mail
     $mail->send();
