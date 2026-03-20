@@ -140,7 +140,7 @@ email.addEventListener("input",function(){
 });
 
 // 2. Button Click Listener (Triggers the animation)
-btnOTP.addEventListener("click", function() {
+btnOTP.addEventListener("click", async function() {
   // Add the 'show' class to the OTP container to animate it in
   otpContainer.classList.add("show");
   // Optional: Change the button text or disable the email input so they don't change it after requesting an OTP
@@ -148,6 +148,8 @@ btnOTP.addEventListener("click", function() {
   otpInput.disabled = false; // Enable OTP input
   email.disabled = true; 
 
+  const data=new FormData();
+  data.append("sender_email",email.value);
 
   
 });
