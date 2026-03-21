@@ -150,7 +150,28 @@ btnOTP.addEventListener("click", async function() {
 
   const data=new FormData();
   data.append("sender_email",email.value);
-
+  try {
+    const response = await fetch("./SignupNLoginBackend/send_otp.php", {
+      method: "POST",
+      body: data
+    });
+    const result = await response.json();
+    if(result.status === "success"){
+    } else {
+      toastText.innerHTML = result.message || "Failed to send OTP";
+      toast.classList.add("toast-active");
+      setTimeout(() => {
+        toast.classList.remove("toast-active");
+      }, 4000);
+    }
+  } catch(err) {
+    console.error('OTP request error:', err);
+    toastText.innerHTML = "An error occurred while sending OTP";
+    toast.classList.add("toast-active");  
+    setTimeout(() => {
+      toast.classList.remove("toast-active");
+    }, 4000); 
+  }
   
 });
 
