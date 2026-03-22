@@ -157,6 +157,11 @@ btnOTP.addEventListener("click", async function() {
     });
     const result = await response.json();
     if(result.status === "success"){
+      toastText.innerHTML = "OTP sent successfully";
+      toast.classList.add("toast-active");
+      setTimeout(() => {
+        toast.classList.remove("toast-active");
+      },4000);
     } else {
       toastText.innerHTML = result.message || "Failed to send OTP";
       toast.classList.add("toast-active");
