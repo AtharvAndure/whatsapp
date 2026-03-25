@@ -181,6 +181,7 @@ btnOTP.addEventListener("click", async function() {
 });
 
 // PASSWORD VALIDATION 
+// need changes here
 password.addEventListener("input",function(){
   if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password.value)){
     toastText.innerHTML="Enter Valid Password";
