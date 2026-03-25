@@ -169,6 +169,7 @@ btnOTP.addEventListener("click", async function() {
         toast.classList.remove("toast-active");
       }, 4000);
     }
+  // aryan
   } catch(err) {
     console.error('OTP request error:', err);
     toastText.innerHTML = "An error occurred while sending OTP";
