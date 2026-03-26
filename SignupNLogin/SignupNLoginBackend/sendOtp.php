@@ -5,7 +5,7 @@ if($_SERVER["REQUEST_METHOD"]!=="POST"){
     exit;
 }
 require_once __DIR__ . "/../../connection/connection.php";
-require_once __DIR__ . "/../../../vendor/autoload.php";
+require_once __DIR__ . '/../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 
 session_start();
@@ -17,7 +17,7 @@ if($email==""){
 }
 
 
-$otp=rand(100000,999999);
+$otp=(string)rand(100000,999999);
 $_SESSION["otp"]=$otp;
 
 $mail=new PHPMailer(true);
