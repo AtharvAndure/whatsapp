@@ -59,7 +59,7 @@ async function runTimeCheck(text) {
     }
 
     const result = await response.json();
-    console.log("PHP Response:", result); // Look at this in your console
+    console.log("PHP Response:", result);
     return result.data;
   } catch (err) {
     console.error("runTimeCheck error:", err);
