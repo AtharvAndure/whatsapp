@@ -1,3 +1,5 @@
+// Need to change Session into JWT 
+
 const username = document.getElementById("username");
 const firstname = document.getElementById("firstname");
 const lastname = document.getElementById("lastname");
