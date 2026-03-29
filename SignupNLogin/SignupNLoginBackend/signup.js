@@ -9,6 +9,7 @@ const cpassword = document.getElementById("c_pass");
 const genderRadios = document.querySelectorAll('input[name="gender"]');
 const toast = document.getElementById("toast");
 const toastText = document.getElementById("text");
+const toastImg = document.getElementById("toast-icon");
 const btnOTP = document.getElementById("btn-otp");
 const otpInput = document.getElementById("otp");
 const otpContainer = document.querySelector(".otp-container");
@@ -45,6 +46,30 @@ function EnableDisable(val) {
 EnableDisable(false);
 btnSignup.disabled = true;
 
+
+
+// Toast Active and Deactive 
+function ToastActiveDeactive(text,status){
+  if(status){
+    clearTimeout(this.timeout); // Clear previous timeout if user is still typing
+    toast.classList.add("toast-active"); // Toast
+    toastText.innerHTML = text;
+    toastImg.src="../asset/icon/invalid.png";
+    toast.style.border="2px solid red";
+  }else{
+    toast.classList.add("toast-active"); // Toast
+    toastText.innerHTML = text;
+    toastImg.src="../asset/icon/check.png";
+    toast.style.border="2px solid yellowgreen";
+    setTimeout(() => {      
+      toast.classList.remove("toast-active");
+    }, 4000);
+  }
+}
+
+
+
+// Runtime Username Check
 async function runTimeCheck(text) {
   const dataToSend = new FormData();
   dataToSend.append("username", text);
@@ -76,26 +101,24 @@ username.addEventListener("keyup", async function () {
 
   if (!patternOk || nameExists === true) {
     this.style.borderBottom = "2px solid red";
-    toast.classList.add("toast-active"); // Toast
-    toastText.innerHTML = "Enter Valid Username";
+    ToastActiveDeactive("Enter Valid Username",true);
     validName = false;
     EnableDisable(false);
   } else {
     this.style.borderBottom = "2px solid rgba(61, 246, 255, 0.3)";
     validName = true;
-    toast.classList.remove("toast-active");
+    ToastActiveDeactive("Username is Valid",false);
     EnableDisable(true);
   }
 
 });
 function ValidName(val, text) {
   if (!/^[a-zA-Z]{3,15}$/.test(val.value)) {
-    toastText.innerHTML = text;
-    toast.classList.add("toast-active");
+    ToastActiveDeactive(text,true);
     val.style.borderBottom = "2px solid red";
     return false;
   } else {
-    toast.classList.remove("toast-active");
+    ToastActiveDeactive(text,false);
     val.style.borderBottom = "2px solid rgba(61, 246, 255, 0.3)";
     return true;
   }
@@ -132,15 +155,14 @@ lastname.addEventListener("input", function () {
 // Email Validation
 email.addEventListener("input", function () {
   if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value)) {
-    toastText.innerHTML = "Enter Valid Email";
-    toast.classList.add("toast-active");
+    
+    ToastActiveDeactive("Enter Valid Email",true);
     email.style.borderBottom = "2px solid red";
     checkemail = false;
     btnOTP.disabled = true;
   } else {
-    toast.classList.remove("toast-active");
+    ToastActiveDeactive("Valid Email",false);
     email.style.borderBottom = "2px solid rgba(61, 246, 255, 0.3)";
-    // checkemail=true;
     btnOTP.disabled = false;
   }
   checkAllValidations();
@@ -166,22 +188,16 @@ btnOTP.addEventListener("click", async function () {
     const result = await response.json();
     console.log("OTP Response:", result); // Look at this in your console
     if (result.status === "success") {
-      toastText.innerHTML = "OTP sent successfully";
-      toast.classList.add("toast-active");
-      setTimeout(() => {
-        toast.classList.remove("toast-active");
-      }, 4000);
+      ToastActiveDeactive("OTP sent successfully",false);
     } else {
-      toastText.innerHTML = result.message || "Failed to send OTP";
-      toast.classList.add("toast-active");
+      ToastActiveDeactive(result.message || "Failed to send OTP",true);
       setTimeout(() => {
         toast.classList.remove("toast-active");
       }, 4000);
     }
   } catch (err) {
     console.error("OTP request error:", err);
-    toastText.innerHTML = "An error occurred while sending OTP";
-    toast.classList.add("toast-active");
+    ToastActiveDeactive("An error occurred while sending OTP",true)
     setTimeout(() => {
       toast.classList.remove("toast-active");
     }, 4000);
@@ -205,27 +221,21 @@ otpInput.addEventListener("input", async function () {
         checkemail = true;
         checkAllValidations();
         console.log("OTP Verification Success:", result); // Look at this in your console
-        toastText.innerHTML = "OTP verified successfully";
-        toast.classList.add("toast-active");
-        setTimeout(() => {
-          toast.classList.remove("toast-active");
-        }, 4000);
+        ToastActiveDeactive("OTP verified successfully",false);
       } else {
         console.log("OTP Verification Failed:", result); // Look at this in your console
         checkotp = false;
         checkemail = false;
         email.disabled = false; // Re-enable email input so they can request a new OTP
         checkAllValidations();
-        toastText.innerHTML = result.message || "Invalid OTP";
-        toast.classList.add("toast-active");
+        ToastActiveDeactive(result.message || "Invalid OTP",true);
         setTimeout(() => {
           toast.classList.remove("toast-active");
-        }, 500);
+        }, 2000);
       }
     } catch (err) {
       console.error("OTP verification error:", err);
-      toastText.innerHTML = "An error occurred while verifying OTP";
-      toast.classList.add("toast-active");
+      ToastActiveDeactive("An error occurred while verifying OTP",true);
       setTimeout(() => {
         toast.classList.remove("toast-active");
       }, 4000);
@@ -240,16 +250,18 @@ password.addEventListener("input", function () {
       password.value,
     )
   ) {
-    toastText.innerHTML = "Enter Valid Password";
-    toast.classList.add("toast-active");
+    ToastActiveDeactive("Enter Valid Password",true);
+    setTimeout(()=>{
+      toast.classList.remove("toast-active");
+    },2000);
     password.style.borderBottom = "2px solid red";
     checkpassword = false;
     cpassword.disabled = true;
   } else {
     cpassword.disabled = false;
-    toast.classList.remove("toast-active");
+    checkpassword = false;
+    ToastActiveDeactive("Valid Password",false);
     password.style.borderBottom = "2px solid rgba(61, 246, 255, 0.3)";
-    checkpassword = true;
   }
   checkAllValidations();
 });
@@ -257,12 +269,14 @@ password.addEventListener("input", function () {
 // Confirm Password Validation
 cpassword.addEventListener("input", function () {
   if (cpassword.value !== password.value) {
-    toastText.innerHTML = "Passwords do not match";
-    toast.classList.add("toast-active");
+    ToastActiveDeactive("Passwords do not match",true);
+    setTimeout(()=>{
+      toast.classList.remove("toast-active");
+    },2000);
     cpassword.style.borderBottom = "2px solid red";
     checkpassword = false;
   } else {
-    toast.classList.remove("toast-active");
+    ToastActiveDeactive("Password Match",false);
     cpassword.style.borderBottom = "2px solid rgba(61, 246, 255, 0.3)";
     checkpassword = true;
   }
@@ -327,16 +341,14 @@ document
         showSuccessModal();
       } else {
         // Show error in toast
-        toastText.innerHTML = result.message || "Registration failed";
-        toast.classList.add("toast-active");
+        ToastActiveDeactive(result.message || "Registration failed",true);
         setTimeout(() => {
           toast.classList.remove("toast-active");
         }, 4000);
       }
     } catch (err) {
       console.error("Form submission error:", err);
-      toastText.innerHTML = "An error occurred during registration";
-      toast.classList.add("toast-active");
+      ToastActiveDeactive("An error occurred during registration",true);
       setTimeout(() => {
         toast.classList.remove("toast-active");
       }, 4000);

@@ -71,13 +71,18 @@
         z-index: 9999; /* Ensures it is above the scanlines */
         transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Cool bouncy animation */
       }
-
+      #toast-icon{
+        height: 2rem;
+        width: 2rem;
+        margin-left: 1rem;
+        color: white;
+      }
       .toast-active {
         right: 20px;
         opacity: 1;
       }
 
-      .icon {
+      .toast-icon {
         height: 2rem;
         width: 2rem;
         margin-right: 1rem;
