@@ -7,6 +7,7 @@ if($_SERVER["REQUEST_METHOD"]!=="POST"){
 require_once __DIR__ . "/../../connection/connection.php";
 require_once __DIR__ . '/../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 session_start();
 
@@ -31,7 +32,7 @@ $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port=587;
 
 $mail->Username = "andureatharv@gmail.com";
-$mail->Password = "pokdxwtvgsshczbe";
+$mail->Password = "oobbkydsuplnzquw";
 
 $mail->setFrom("andureatharv@gmail.com", "Baate");
 $mail->addAddress($email);
@@ -39,14 +40,10 @@ $mail->addAddress($email);
 $mail->Subject="OTP Verification";
 $mail->Body = "Your OTP is $otp";
 
-
 try{
     $mail->send();
     echo json_encode(["status"=>"success","message"=>"OTP Sent Successfully"]);
 }catch(Exception $e){
-    echo json_encode(["status"=>"error","message"=>"OTP Not Sent"]);
+    echo json_encode(["status"=>"error","message"=>"OTP Not Sent . Error: " . $mail->ErrorInfo]);
 }
-
-
-
 ?>

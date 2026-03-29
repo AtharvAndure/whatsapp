@@ -15,6 +15,11 @@ if($otp==""){
     echo json_encode(["status"=>"error","message"=>"Enter Valid OTP"]);
     exit;
 }
+if (!isset($_SESSION["otp"]) || $_SESSION["otp"] === "") {
+    echo json_encode(["status" => "error", "message" => "No OTP generated. Please request a new OTP."]);
+    exit;
+}
+
 if ($otp === "" || strlen($otp) !== 6 || !is_numeric($otp) || $otp !== $_SESSION["otp"]) {
     echo json_encode(["status" => "error", "message" => "Invalid OTP"]);
 } else {

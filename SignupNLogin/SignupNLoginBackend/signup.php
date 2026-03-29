@@ -40,10 +40,9 @@ try {
     }
 
     // 5. Check if username or email already exists
-    $checkQuery = $pdo->prepare("SELECT user_id FROM users WHERE username = :username OR email = :email");
+    $checkQuery = $pdo->prepare("SELECT user_id FROM users WHERE username = :username");
     $checkQuery->execute([
-        ':username' => $username,
-        ':email' => $email
+        ':username' => $username
     ]);
     
     if ($checkQuery->rowCount() > 0) {

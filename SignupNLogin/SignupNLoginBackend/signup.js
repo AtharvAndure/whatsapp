@@ -1,4 +1,4 @@
-// Need to change Session into JWT 
+// Need to change Session into JWT
 
 const username = document.getElementById("username");
 const firstname = document.getElementById("firstname");
@@ -49,10 +49,10 @@ async function runTimeCheck(text) {
   const dataToSend = new FormData();
   dataToSend.append("username", text);
   try {
-    const response = await fetch("./loginBackend/login.php", {
+    const response = await fetch("./SignupNLoginBackend/check_user.php", {
       method: "POST",
       body: dataToSend,
-      credentials:"include"
+      credentials: "include",
     });
 
     if (!response.ok) {
@@ -74,7 +74,6 @@ username.addEventListener("keyup", async function () {
   const patternOk = /^[a-zA-Z0-9]{3,15}$/.test(value);
   const nameExists = await runTimeCheck(value);
 
-  console.log("Pattern OK:", patternOk, "| Name Exists:", nameExists); // Look at this in your console
   if (!patternOk || nameExists === true) {
     this.style.borderBottom = "2px solid red";
     toast.classList.add("toast-active"); // Toast
@@ -87,6 +86,7 @@ username.addEventListener("keyup", async function () {
     toast.classList.remove("toast-active");
     EnableDisable(true);
   }
+
 });
 function ValidName(val, text) {
   if (!/^[a-zA-Z]{3,15}$/.test(val.value)) {
@@ -106,8 +106,8 @@ function checkAllValidations() {
     validName &&
     checkfirstname &&
     checklastname &&
-    checkemail &&      // Becomes true when OTP is successful
-    checkotp &&        // ADD THIS: Ensure OTP was successful
+    checkemail && // Becomes true when OTP is successful
+    checkotp && // ADD THIS: Ensure OTP was successful
     checkpassword &&
     checkgender
   ) {
@@ -161,7 +161,7 @@ btnOTP.addEventListener("click", async function () {
     const response = await fetch("./SignupNLoginBackend/sendOtp.php", {
       method: "POST",
       body: data,
-      credentials:"include"
+      credentials: "include",
     });
     const result = await response.json();
     console.log("OTP Response:", result); // Look at this in your console
@@ -197,13 +197,14 @@ otpInput.addEventListener("input", async function () {
       const response = await fetch("./SignupNLoginBackend/receiveOtp.php", {
         method: "POST",
         body: data,
-        credentials:"include"
+        credentials: "include",
       });
       const result = await response.json();
       if (result.status === "success") {
         checkotp = true;
         checkemail = true;
         checkAllValidations();
+        console.log("OTP Verification Success:", result); // Look at this in your console
         toastText.innerHTML = "OTP verified successfully";
         toast.classList.add("toast-active");
         setTimeout(() => {
@@ -213,6 +214,7 @@ otpInput.addEventListener("input", async function () {
         console.log("OTP Verification Failed:", result); // Look at this in your console
         checkotp = false;
         checkemail = false;
+        email.disabled = false; // Re-enable email input so they can request a new OTP
         checkAllValidations();
         toastText.innerHTML = result.message || "Invalid OTP";
         toast.classList.add("toast-active");
@@ -306,6 +308,10 @@ document
   .getElementById("signupForm")
   .addEventListener("submit", async function (e) {
     e.preventDefault();
+
+    email.disabled = false;
+    otpInput.disabled = false;
+    username.disabled = false;
 
     const formData = new FormData(this);
 
