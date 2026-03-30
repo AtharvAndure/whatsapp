@@ -1,3 +1,5 @@
+// Profile Image and Description Handling
+
 const profileImage = document.getElementById("profile-image");
 const baseLink=profileImage.getAttribute("data-folder");
 const profileFile = document.getElementById("profile-file");
