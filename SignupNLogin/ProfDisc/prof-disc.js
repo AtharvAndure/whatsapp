@@ -1,4 +1,4 @@
-// Profile Image and Description Handling
+// Profile Image and Description Handling need Session Changes
 
 const profileImage = document.getElementById("profile-image");
 const baseLink=profileImage.getAttribute("data-folder");
