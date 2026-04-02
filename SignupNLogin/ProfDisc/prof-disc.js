@@ -1,5 +1,5 @@
-// Profile Image and Description Handling need Session Changes
-
+// Profile Image and Description Handling need Session Changes.
+// Need to Change Database Structure.
 const profileImage = document.getElementById("profile-image");
 const baseLink=profileImage.getAttribute("data-folder");
 const profileFile = document.getElementById("profile-file");
