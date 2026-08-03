@@ -4,13 +4,13 @@ require_once "../../connection/connection.php";
 
 session_start();
 
-// Fetching User through Session
-if (empty($_SESSION['username'])){
+// Fetching User through Session. Login and signup currently use different
+// casing, so support both keys while the session format is unified.
+$username = $_SESSION['username'];
+if ($username === ''){
     echo json_encode(["status"=>"error","message"=>"No active session"]);
     exit;
 }
-
-$username = $_SESSION['Username'];
 
 // ==========================================
 // 1. HANDLE GET REQUEST (FETCHING DATA)

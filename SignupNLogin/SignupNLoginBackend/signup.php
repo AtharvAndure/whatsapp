@@ -70,7 +70,7 @@ try {
         // 8. If successful, set the temporary session and send success message
         
         // Use a temporary session key to prevent old session collisions
-        $_SESSION['Username'] = $username;
+        // $_SESSION['Username'] = $username;
         
         // Send JSON response and exit immediately
         echo json_encode(["status" => "success", "message" => "Registration successful!"]);

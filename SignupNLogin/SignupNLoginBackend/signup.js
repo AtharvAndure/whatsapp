@@ -312,7 +312,7 @@ function closeSuccessModal() {
     setTimeout(() => {
       modal.style.display = "none";
       // Redirect to login page
-      window.location.href = "Prof-Disc.html";
+      window.location.href = "login.html";
     }, 400);
   }
 }

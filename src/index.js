@@ -12,7 +12,33 @@ async function load(filename, event) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+async function checkAuth() {
+  try {
+    const response = await fetch('auth-check.php', {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || result.status !== 'authorized') {
+      window.location.href = '../SignupNLogin/login.html';
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    window.location.href = '../SignupNLogin/login.html';
+    return false;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const isLoggedIn = await checkAuth();
+  if (!isLoggedIn) {
+    return;
+  }
+
   const defaultTab = document.querySelector(".left-container a");
   load("component/message.html", defaultTab);
 });
