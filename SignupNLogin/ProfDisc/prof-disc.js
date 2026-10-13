@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       window.location.href = "/whatsapp/SignupNLogin/login.html";
     }
   } catch (err) {
-    // console.error("runTimeCheck error:", err);
-    window.location.href = "/whatsapp/SignupNLogin/login.html";
+    console.error("runTimeCheck error:", err);
+    // window.location.href = "/whatsapp/SignupNLogin/login.html";
 
     return null;
   }

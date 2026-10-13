@@ -16,7 +16,7 @@ if ($username === ''){
 // 1. HANDLE GET REQUEST (FETCHING DATA)
 // ==========================================
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $query = "SELECT username, profile_img, profile_disc FROM users WHERE username = :user LIMIT 1";
+    $query = "SELECT username, profile_img, profile_desc FROM users WHERE username = :user LIMIT 1";
     $stmt = $pdo->prepare($query);
     $stmt->execute([':user' => $username]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -69,14 +69,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Update database - only update image if a new one was uploaded
     if ($hasNewImage) {
-        $query = "UPDATE users SET profile_img = :profImg, profile_disc = :profDisc WHERE username = :username";
+        $query = "UPDATE users SET profile_img = :profImg, profile_desc = :profDisc WHERE username = :username";
         $bindings = [
             ':profImg' => $profileImg,
             ':profDisc' => $profileDisc,
             ':username' => $username
         ];
     } else {
-        $query = "UPDATE users SET profile_disc = :profDisc WHERE username = :username";
+        $query = "UPDATE users SET profile_desc = :profDisc WHERE username = :username";
         $bindings = [
             ':profDisc' => $profileDisc,
             ':username' => $username
