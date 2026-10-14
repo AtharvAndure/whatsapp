@@ -1,8 +1,8 @@
 <?php
-$host     = 'localhost';
-$db       = 'chat-web-app';
+$host     = 'db';
+$db       = 'whatsapp';
 $user     = 'root';              
-$password = '';                  
+$password = 'rootpassword';                  
 $charset  = 'utf8mb4';
 
 $options = [

@@ -1,0 +1,12 @@
+.git
+.gitignore
+.vscode
+.idea
+whatsappDB.sql
+docker-compose.yml
+Dockerfile
+README.md
+
+# Ignore all local uploads, but keep the folder structure and default image
+asset/images/*
+!asset/images/default.png
